@@ -236,3 +236,93 @@ git push origin main
 Este exercício prático, incluindo o seu código, foi elaborado por **Rodrigo Brito**, aluno de mestrado do DCC/UFMG, como parte das suas atividades na disciplina Estágio em Docência, cursada em 2020/2, sob orientação do **Prof. Marco Tulio Valente**.
 
 O código deste repositório possui uma [licença MIT](https://opensource.org/license/mit). O roteiro descrito acima possui uma licença [CC-BY](https://creativecommons.org/licenses/by/4.0/).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 📚 Arquitetura Visual - Micro-Livraria (Modelo C4)
+---
+
+## 🔹 1. Diagrama de Contexto
+
+```mermaid
+graph TD
+    Cliente[Cliente] --> Sistema[Micro-Livraria]
+    Admin[Administrador] --> Sistema
+
+    Sistema --> Pagamento[Gateway de Pagamento]
+    Sistema --> Entrega[Serviço de Entrega]
+```
+
+---
+
+## 🔹 2. Diagrama de Containers
+
+```mermaid
+graph TD
+    Cliente --> Frontend[Frontend Web]
+    Admin --> Frontend
+
+    Frontend --> API[Backend API]
+
+    API --> Catalogo[Microserviço de Catálogo]
+    API --> Pedidos[Microserviço de Pedidos]
+    API --> Pagamento[Microserviço de Pagamento]
+
+    Catalogo --> DB[(Banco de Dados)]
+    Pedidos --> DB
+    Pagamento --> DB
+
+    Pagamento --> Gateway[Gateway Externo]
+    Pedidos --> Entrega[Serviço de Entrega]
+```
+
+---
+
+## 🔹 3. Diagrama de Componentes (Backend API)
+
+```mermaid
+graph TD
+    Controller --> Auth[Auth Component]
+    Controller --> Catalogo[Catalog Component]
+    Controller --> Pedido[Order Component]
+    Controller --> Pagamento[Payment Component]
+
+    Auth --> RepoAuth[(Auth Repository)]
+    Catalogo --> RepoCat[(Catalog Repository)]
+    Pedido --> RepoPedido[(Order Repository)]
+    Pagamento --> RepoPag[(Payment Repository)]
+```
+
+---
+
+## 🔹 4. Diagrama de Código (Order)
+
+```mermaid
+classDiagram
+    class OrderController
+    class OrderService
+    class OrderRepository
+    class Order
+
+    OrderController --> OrderService
+    OrderService --> OrderRepository
+    OrderRepository --> Order
+```
