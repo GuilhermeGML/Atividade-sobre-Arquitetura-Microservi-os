@@ -29,6 +29,14 @@ body {
     border-right: none;
 }
 
+.search-box {
+    margin-bottom: 1rem;
+}
+
+.search-controls {
+    margin-bottom: 0;
+}
+
 .card-image > .fa {
     font-size: 8rem;
     padding-top: 2rem;
